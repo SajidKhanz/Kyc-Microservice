@@ -3,8 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    <UserSecretsId>0daf538c-7719-4ad1-80a6-f79331306b8d</UserSecretsId>
+    <UserSecretsId>4a083e01-c343-475c-b59b-8913e18e15cd</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
