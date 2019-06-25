@@ -25,6 +25,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevTask.Common", "Common\De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevTask.MRZService.API", "Services\MRZService\DevTask.MRZService.API.csproj", "{9DFEE5CD-A68C-400F-9116-9B95128F7F04}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{6C49EA54-BAAE-4E74-A2CC-742210634F20}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevTask.MrzUnitTest", "Test\DevTask.MrzUnitTest\DevTask.MrzUnitTest.csproj", "{492C2FA1-40ED-499B-B548-BCA03DC98E77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{9DFEE5CD-A68C-400F-9116-9B95128F7F04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DFEE5CD-A68C-400F-9116-9B95128F7F04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DFEE5CD-A68C-400F-9116-9B95128F7F04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{492C2FA1-40ED-499B-B548-BCA03DC98E77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{492C2FA1-40ED-499B-B548-BCA03DC98E77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{492C2FA1-40ED-499B-B548-BCA03DC98E77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{492C2FA1-40ED-499B-B548-BCA03DC98E77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +67,7 @@ Global
 		{97807A5B-0E8B-489B-B40B-37F071FAAC58} = {8617888D-9B1E-4B32-8840-C5E78CFA0765}
 		{281BE552-57D0-4A07-B416-B5AF1E118999} = {AD391F4C-F6FA-4C08-A41D-008BF8BB13CF}
 		{9DFEE5CD-A68C-400F-9116-9B95128F7F04} = {A6F428A9-66E3-444E-AC9E-3E4C65611133}
+		{492C2FA1-40ED-499B-B548-BCA03DC98E77} = {6C49EA54-BAAE-4E74-A2CC-742210634F20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4572A891-0FC9-4299-B40B-6EFB9893E99C}
