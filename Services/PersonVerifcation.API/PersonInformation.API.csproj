@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    <UserSecretsId>4a083e01-c343-475c-b59b-8913e18e15cd</UserSecretsId>
+    <UserSecretsId>fcf09925-7ffa-4d78-9d99-e238d43937f9</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,10 +14,6 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\DevTask.Models\DevTask.Models.csproj" />
   </ItemGroup>
 
 </Project>

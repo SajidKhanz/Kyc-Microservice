@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using DevTask.Models;
 using DevTask.MRZService.API.Config;
 using Microsoft.AspNetCore.Mvc;
+using DevTask.MRZService.API.Models;
 
 namespace DevTask.MRZService.API.Controllers
 {
