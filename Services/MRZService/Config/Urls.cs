@@ -7,6 +7,6 @@ namespace DevTask.MRZService.API.Config
 {
     public static class Urls
     {
-        public const string GetMRZData = "~api/getpersoninformationbymrz/";
+        public const string GetMRZData = "~/api/getpersoninformationbymrz/";
     }
 }

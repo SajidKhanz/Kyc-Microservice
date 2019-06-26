@@ -1,5 +1,10 @@
 using DevTask.MRZService.API.Services;
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 using Xunit;
 
 namespace DevTask.MrzUnitTest
@@ -9,8 +14,11 @@ namespace DevTask.MrzUnitTest
         [Fact]
         public void get_data_from_abbyyserver()
         {
-            ABBYYMRZService service = new ABBYYMRZService();
-            service.GetPersonInformation(string.Empty);
+            //ABBYYMRZService service = new ABBYYMRZService();
+            //service.GetPersonInformation(string.Empty);
+
         }
+
+
     }
 }

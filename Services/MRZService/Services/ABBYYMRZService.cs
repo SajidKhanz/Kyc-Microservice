@@ -63,8 +63,8 @@ namespace DevTask.MRZService.API.Services
         {
             ApplicationId = "My_mrz_reader_test";
             Password = "zu31ZfenDltuZ3tD0ZsQKs6K";
-            GetResult(ApplicationId, Password, FilePath, "English", "xml");
-            return new PersonInformation();
+           return  GetResult(ApplicationId, Password, FilePath, "English", "xml");
+            
         }
 
 
@@ -77,8 +77,11 @@ namespace DevTask.MRZService.API.Services
         /// <param name="language">Recognition language</param>
         /// <param name="exportFormat">Recognition export format</param>
         /// <remarks>Language and export formats specification can be obtained from "https://ocrsdk.com/documentation/apireference/processImage/"</remarks>
-        protected void GetResult(string applicationId, string password, string filePath, string language, string exportFormat)
+        protected PersonInformation  GetResult(string applicationId, string password, string filePath, string language, string exportFormat)
         {
+
+            PersonInformation person = null;
+
             // Specifying new post request filling it with file content
             var url = string.Format("http://cloud.ocrsdk.com/processMRZ");
             var localPath = "C:\\Users\\999247\\Documents\\eida1.png";
@@ -105,13 +108,36 @@ namespace DevTask.MRZService.API.Services
             request = (HttpWebRequest)HttpWebRequest.Create(resultUrl);
             var document = GetResponse(request);
 
-            using (HttpWebResponse result = (HttpWebResponse)request.GetResponse())
+            if(document!=null)
             {
-                using (Stream stream = result.GetResponseStream())
-                {
-                 
-                }
-            }
+                person = MapPerson(document);
+            }           
+
+            return person;
+        }
+
+
+        public PersonInformation MapPerson(XDocument document)
+        {
+
+            PersonInformation personInfo = new PersonInformation();
+            IEnumerable<XElement> childList = from el in document.Root.Elements()
+                                              select el;
+                                             
+            string mrzType = FindElement(childList, "MrzType")?.ToString();
+
+            personInfo.GivenName = FindElement(childList, "GivenName")?.Value;
+            personInfo.LastName = FindElement(childList, "LastName")?.Value;
+            personInfo.BirthDate = FindElement(childList, "BirthDate")?.Value;
+            personInfo.Nationality = FindElement(childList, "Nationality")?.Value;
+            
+            return personInfo;
+        }
+
+
+        public XElement FindElement(IEnumerable<XElement> elements, string type)
+        {
+            return elements.SingleOrDefault(p => (string)p.Attribute("type") == type);
         }
 
         /// <summary>
@@ -126,6 +152,8 @@ namespace DevTask.MRZService.API.Services
             request.Proxy = proxy;
             return request;
         }
+
+
 
         /// <summary>
         /// Adds content from local file to request stream
