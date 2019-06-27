@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KYCVerifcation.API.Servces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,7 @@ namespace KYCVerifcation.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IKYCVerifcationService>(s=>  new TruliooKYCVerifcationService() { Key = Configuration.GetValue<string>("TruliooKey") ,TruilooUrl = Configuration.GetValue<string>("TruilooUrl") });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

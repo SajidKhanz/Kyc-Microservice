@@ -13,14 +13,14 @@ namespace DevTask.MRZService.API.Controllers
     [ApiController]
     public class MRZController : ControllerBase
     {
+
         IMRZService _service;
 
         [Route(Urls.GetMRZData)]
-        [HttpGet]       
-        public ActionResult<PersonInformation> GetPersonInformationByMRZ()
-        {
-            
-           return _service.GetPersonInformation(""); 
+        [HttpPost]       
+        public ActionResult<PersonInformation> GetPersonInformationByMRZ(MRZRequest request)
+        {            
+           return _service.GetPersonInformation(request.ImageData); 
         }
 
         public MRZController(IMRZService service)

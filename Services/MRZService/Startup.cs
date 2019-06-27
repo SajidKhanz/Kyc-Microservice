@@ -27,7 +27,7 @@ namespace DevTask.MRZService.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddTransient<IMRZService,ABBYYMRZService>();
+            services.AddTransient<IMRZService>(s => new ABBYYMRZService() { Password = Configuration.GetValue<string>("ABBYYPassword"), ApplicationId = Configuration.GetValue<string>("ABBYYApplicationId") , ServiceUrl = Configuration.GetValue<string>("ABBYServiceURL")});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

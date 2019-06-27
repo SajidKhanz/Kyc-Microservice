@@ -15,17 +15,14 @@ namespace DevTask.MRZService.API.Services
 
         private IWebProxy _proxy;
         private ICredentials _credentials;
-        protected string ApplicationId { get; set; }
+        public string ApplicationId { get; set; }
+        public string ServiceUrl { get; set; }
+        
 
         /// <summary>
         /// User password
         /// </summary>
-        protected string Password { get; set; }
-
-        /// <summary>
-        /// Virtual file path on web server
-        /// </summary>
-        protected string FilePath { get; set; }
+        public string Password { get; set; }
 
         /// <summary>
         /// Network credentials
@@ -60,11 +57,9 @@ namespace DevTask.MRZService.API.Services
             }
         }
         public PersonInformation GetPersonInformation(string imageBase64)
-        {
-            ApplicationId = "My_mrz_reader_test";
-            Password = "zu31ZfenDltuZ3tD0ZsQKs6K";
-           return  GetResult(ApplicationId, Password, FilePath, "English", "xml");
-            
+        {           
+            return GetResult(ApplicationId, Password, imageBase64, "English", "xml");
+
         }
 
 
@@ -77,23 +72,23 @@ namespace DevTask.MRZService.API.Services
         /// <param name="language">Recognition language</param>
         /// <param name="exportFormat">Recognition export format</param>
         /// <remarks>Language and export formats specification can be obtained from "https://ocrsdk.com/documentation/apireference/processImage/"</remarks>
-        protected PersonInformation  GetResult(string applicationId, string password, string filePath, string language, string exportFormat)
+        protected PersonInformation GetResult(string applicationId, string password, string imageBase64, string language, string exportFormat)
         {
 
             PersonInformation person = null;
 
             // Specifying new post request filling it with file content
-            var url = string.Format("http://cloud.ocrsdk.com/processMRZ");
-            var localPath = "C:\\Users\\999247\\Documents\\eida1.png";
+            var url = string.Format("{0}/processMRZ",ServiceUrl);
+
             var request = CreateRequest(url, "POST", Credentials, Proxy);
-            FillRequestWithContent(request, localPath);
+            FillRequestWithContent(request, imageBase64);
 
             // Getting task id from response
             var response = GetResponse(request);
             var taskId = GetTaskId(response);
 
             // Checking if task is completed and downloading result by provided url
-            url = string.Format("http://cloud.ocrsdk.com/getTaskStatus?taskId={0}", taskId);
+            url = string.Format("{0}/getTaskStatus?taskId={1}", ServiceUrl, taskId);
             var resultUrl = string.Empty;
             var status = string.Empty;
             while (status != "Completed")
@@ -108,10 +103,10 @@ namespace DevTask.MRZService.API.Services
             request = (HttpWebRequest)HttpWebRequest.Create(resultUrl);
             var document = GetResponse(request);
 
-            if(document!=null)
+            if (document != null)
             {
                 person = MapPerson(document);
-            }           
+            }
 
             return person;
         }
@@ -123,14 +118,14 @@ namespace DevTask.MRZService.API.Services
             PersonInformation personInfo = new PersonInformation();
             IEnumerable<XElement> childList = from el in document.Root.Elements()
                                               select el;
-                                             
+
             string mrzType = FindElement(childList, "MrzType")?.ToString();
 
             personInfo.GivenName = FindElement(childList, "GivenName")?.Value;
             personInfo.LastName = FindElement(childList, "LastName")?.Value;
             personInfo.BirthDate = FindElement(childList, "BirthDate")?.Value;
             personInfo.Nationality = FindElement(childList, "Nationality")?.Value;
-            
+
             return personInfo;
         }
 
@@ -158,25 +153,16 @@ namespace DevTask.MRZService.API.Services
         /// <summary>
         /// Adds content from local file to request stream
         /// </summary>
-        protected static void FillRequestWithContent(HttpWebRequest request, string contentPath)
+        protected static void FillRequestWithContent(HttpWebRequest request, string imageBase64)
         {
-            using (BinaryReader reader = new BinaryReader(File.OpenRead(contentPath)))
+            var imageBytes = Convert.FromBase64String(imageBase64);
+
+            request.ContentLength = imageBytes.Length;
+            using (Stream stream = request.GetRequestStream())
             {
-                request.ContentLength = reader.BaseStream.Length;
-                using (Stream stream = request.GetRequestStream())
-                {
-                    byte[] buffer = new byte[reader.BaseStream.Length];
-                    while (true)
-                    {
-                        int bytesRead = reader.Read(buffer, 0, buffer.Length);
-                        if (bytesRead == 0)
-                        {
-                            break;
-                        }
-                        stream.Write(buffer, 0, bytesRead);
-                    }
-                }
+                stream.Write(imageBytes, 0, imageBytes.Length);
             }
+
         }
 
         /// <summary>

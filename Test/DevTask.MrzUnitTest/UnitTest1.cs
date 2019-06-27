@@ -14,8 +14,8 @@ namespace DevTask.MrzUnitTest
         [Fact]
         public void get_data_from_abbyyserver()
         {
-            //ABBYYMRZService service = new ABBYYMRZService();
-            //service.GetPersonInformation(string.Empty);
+            ABBYYMRZService service = new ABBYYMRZService();
+            service.GetPersonInformation(string.Empty);
 
         }
 

@@ -5,4 +5,6 @@ namespace DevTask.Common
     public class Helper
     {
     }
+
+
 }
