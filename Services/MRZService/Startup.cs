@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DevTask.EvenBus;
+using DevTask.EvenBus.DomainEvents;
+using DevTask.RabbitMQ;
 using DevTask.MRZService.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +31,8 @@ namespace DevTask.MRZService.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IMRZService>(s => new ABBYYMRZService() { Password = Configuration.GetValue<string>("ABBYYPassword"), ApplicationId = Configuration.GetValue<string>("ABBYYApplicationId") , ServiceUrl = Configuration.GetValue<string>("ABBYServiceURL")});
+            services.AddSingleton<IEventBus>(s => new RabbitMQEventBus("localhost", "kycverfication"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

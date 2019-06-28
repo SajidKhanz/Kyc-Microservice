@@ -8,6 +8,6 @@ namespace KYCVerifcation.API.Servces
 {
     public interface  IKYCVerifcationService
     {
-        KYCPersonVerifcationResult VerifyPersonInfo(KYCPersonVerificationRequest request);
+        KYCVerifcationServiceResult VerifyPersonInfo(KYCVerificationRequest request);
     }
 }

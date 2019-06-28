@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KYCVerifcation.API.Models
 {
-    public class KYCPersonVerifcationResult
+    public class KYCVerifcationServiceResult
     {
         public string TransactionID { get; set; }
         public DateTime UploadedDt { get; set; }

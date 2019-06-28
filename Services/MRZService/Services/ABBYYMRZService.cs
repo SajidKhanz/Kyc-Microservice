@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -121,18 +122,25 @@ namespace DevTask.MRZService.API.Services
 
             string mrzType = FindElement(childList, "MrzType")?.ToString();
 
-            personInfo.GivenName = FindElement(childList, "GivenName")?.Value;
-            personInfo.LastName = FindElement(childList, "LastName")?.Value;
-            personInfo.BirthDate = FindElement(childList, "BirthDate")?.Value;
-            personInfo.Nationality = FindElement(childList, "Nationality")?.Value;
+            personInfo.GivenName =  FindElement(childList, "GivenName");
+            personInfo.LastName = FindElement(childList, "LastName");
+            personInfo.BirthDate = FindElement(childList, "BirthDate");
+            personInfo.Nationality = FindElement(childList, "Nationality");
+            personInfo.PassportNumber = FindElement(childList, "DocumentNumber");
 
             return personInfo;
         }
 
 
-        public XElement FindElement(IEnumerable<XElement> elements, string type)
+        public string FindElement(IEnumerable<XElement> elements, string type)
         {
-            return elements.SingleOrDefault(p => (string)p.Attribute("type") == type);
+            var element = elements.SingleOrDefault(p => (string)p.Attribute("type") == type);
+            string value = element?.Value;
+
+            value = Regex.Replace(value, @"[\r\n]", string.Empty);
+
+            return value?.Trim();
+
         }
 
         /// <summary>

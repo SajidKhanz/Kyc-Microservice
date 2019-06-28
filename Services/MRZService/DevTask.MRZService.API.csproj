@@ -16,4 +16,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.4.10" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\EventBus\DevTask.EvenBus\DevTask.EvenBus.csproj" />
+    <ProjectReference Include="..\..\EventBus\DevTask.RabbitMQEventBus\DevTask.RabbitMQEventBus.csproj" />
+  </ItemGroup>
+
 </Project>

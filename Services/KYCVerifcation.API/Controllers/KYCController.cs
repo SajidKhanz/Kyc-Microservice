@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KYCVerifcation.API.Controllers
 {
-    [Route("api/[controller]")]
+   
     [ApiController]
     public class KYCController : ControllerBase
     {
@@ -22,10 +22,22 @@ namespace KYCVerifcation.API.Controllers
 
         [Route(Urls.VerifyPerson)]
         [HttpPost]
-        public KYCPersonVerifcationResult VerifyPerson(KYCPersonVerificationRequest kycRequest)
+        public KYCVerificationResponse VerifyPerson(KYCVerificationRequest kycRequest)
         {
-            KYCPersonVerifcationResult kycResult = _service.VerifyPersonInfo(kycRequest);
-            return kycResult;
+            KYCVerificationResponse response = new KYCVerificationResponse();
+
+            try
+            {
+                KYCVerifcationServiceResult kycResult = _service.VerifyPersonInfo(kycRequest);
+                response.Result = kycResult;
+
+            }
+            catch(Exception ex)
+            {
+                response.FailureReason = ex.Message;
+            }
+                      
+            return response;
         }
 
 

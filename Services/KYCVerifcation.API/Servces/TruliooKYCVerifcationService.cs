@@ -15,10 +15,10 @@ namespace KYCVerifcation.API.Servces
     {
         public string Key { get; set; }
         public string TruilooUrl { get; set; }
-        public KYCPersonVerifcationResult VerifyPersonInfo(KYCPersonVerificationRequest request)
+        public KYCVerifcationServiceResult VerifyPersonInfo(KYCVerificationRequest request)
         {
 
-            KYCPersonVerifcationResult kycResult = null;
+            KYCVerifcationServiceResult kycResult = null;
             
 
             HttpClient _httpClient = new HttpClient(new HttpClientHandler { UseCookies = false });
@@ -34,7 +34,7 @@ namespace KYCVerifcation.API.Servces
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                kycResult = JsonConvert.DeserializeObject<KYCPersonVerifcationResult>(result);
+                kycResult = JsonConvert.DeserializeObject<KYCVerifcationServiceResult>(result);
             }
 
             return kycResult;

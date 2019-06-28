@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DevTask.EvenBus;
+using DevTask.EvenBus.DomainEvents;
+using DevTask.RabbitMQ;
+using KYCVerifcation.API.EventHandlers;
 using KYCVerifcation.API.Servces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -28,6 +32,8 @@ namespace KYCVerifcation.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IKYCVerifcationService>(s=>  new TruliooKYCVerifcationService() { Key = Configuration.GetValue<string>("TruliooKey") ,TruilooUrl = Configuration.GetValue<string>("TruilooUrl") });
+            services.AddSingleton<IEventBus>(s => new RabbitMQEventBus("localhost", "kycverfication"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +50,9 @@ namespace KYCVerifcation.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            var eventBus = app.ApplicationServices.GetRequiredService<IEventBus>();           
+            eventBus.Subscribe("MRZVerifiedEvent", typeof(MRZVerifiedEventHandler));
         }
     }
 }

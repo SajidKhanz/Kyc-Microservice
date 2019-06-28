@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Data\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -18,6 +19,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\DevTask.Common.csproj" />
+    <ProjectReference Include="..\..\EventBus\DevTask.EvenBus\DevTask.EvenBus.csproj" />
+    <ProjectReference Include="..\..\EventBus\DevTask.RabbitMQEventBus\DevTask.RabbitMQEventBus.csproj" />
   </ItemGroup>
 
 </Project>

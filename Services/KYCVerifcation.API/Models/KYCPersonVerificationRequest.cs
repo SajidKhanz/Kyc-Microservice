@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace KYCVerifcation.API.Models
 {
-    public class KYCPersonVerificationRequest
+    public class KYCVerificationRequest
     {
         public bool AcceptTruliooTermsAndConditions { get; set; }
         public bool CleansedAddress { get; set; }
