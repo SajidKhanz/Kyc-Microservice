@@ -15,6 +15,11 @@ namespace DevTask.KYC.Web.Services
     {
 
         public string KYCSeriveBaseUrl { get; set; }
+
+        public KYCService(string baseUrl)
+        {
+            KYCSeriveBaseUrl = baseUrl;
+        }
         public KYCVerificationResult GetKYCResult(string transactionId)
         {
             KYCVerificationResult kycResult = null;

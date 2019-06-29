@@ -20,6 +20,15 @@ namespace DevTask.KYC.Web.Controllers
         IMRZService _mRZservice;
         IKYCService _kYCService;
 
+
+        public KYCController(IMRZService mRZservice,
+        IKYCService kYCService)
+        {
+            _mRZservice = mRZservice;
+            _kYCService = kYCService;
+
+        }
+
         [Route(Urls.KYCUploadFile)]
         public IActionResult Index()
         {
@@ -38,8 +47,7 @@ namespace DevTask.KYC.Web.Controllers
                     file.CopyTo(ms);
                     var fileBytes = ms.ToArray();
                     string imageBase64 = Convert.ToBase64String(fileBytes);
-
-                    _mRZservice = new MRZService() { MRZSeriveBaseUrl = "https://localhost:44391" };
+                                        
                     var transactionId = _mRZservice.GetPersonInfornmationByMRZ(imageBase64);
 
                     return Redirect(Urls.KYCResult.Replace("{transactionId}", transactionId));
@@ -54,7 +62,7 @@ namespace DevTask.KYC.Web.Controllers
         [HttpGet]
         public IActionResult KYCResult(string transactionId)
         {
-            _kYCService = new KYCService() { KYCSeriveBaseUrl = "https://localhost:44358" };
+            
           var kycResult =  _kYCService.GetKYCResult(transactionId);
             return View(kycResult);
 

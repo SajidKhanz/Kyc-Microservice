@@ -34,5 +34,11 @@ namespace DevTask.KYC.Web.Services
 
             return transactionId;
         }
+
+        public MRZService(string baseUrl)
+        {
+            MRZSeriveBaseUrl = baseUrl;
+        }
+
     }
 }

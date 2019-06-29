@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using DevTask.KYC.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using DevTask.KYC.Web.Services;
 
 namespace DevTask.KYC.Web
 {
@@ -41,6 +42,11 @@ namespace DevTask.KYC.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+  
+            services.AddTransient<IMRZService>(s => new MRZService(Configuration.GetValue<string>("MRZServiceBaseUrl")));
+            services.AddTransient<IKYCService>(s => new KYCService(Configuration.GetValue<string>("KYCSeriveBaseUrl")));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
