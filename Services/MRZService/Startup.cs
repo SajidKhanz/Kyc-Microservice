@@ -31,7 +31,7 @@ namespace DevTask.MRZService.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IMRZService>(s => new ABBYYMRZService() { Password = Configuration.GetValue<string>("ABBYYPassword"), ApplicationId = Configuration.GetValue<string>("ABBYYApplicationId") , ServiceUrl = Configuration.GetValue<string>("ABBYServiceURL")});
-            services.AddSingleton<IEventBus>(s => new RabbitMQEventBus("localhost", "kycverfication"));
+            services.AddSingleton<IEventBus>(s => new RabbitMQEventBus(Configuration.GetValue<string>("RabbitMQHost"), "kycverfication"));
 
         }
 

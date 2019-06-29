@@ -35,7 +35,7 @@ namespace KYCVerifcation.API
            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IKYCVerifcationService>(s=>  new TruliooKYCVerifcationService() { Key = Configuration.GetValue<string>("TruliooKey") ,TruilooUrl = Configuration.GetValue<string>("TruilooUrl") });
-            services.AddSingleton<IEventBus>(s => new RabbitMQEventBus("localhost", "kycverfication"));
+            services.AddSingleton<IEventBus>(s => new RabbitMQEventBus(Configuration.GetValue<string>("RabbitMQHost"), "kycverfication"));
 
         }
 
