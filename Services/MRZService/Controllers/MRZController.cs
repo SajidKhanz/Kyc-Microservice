@@ -33,11 +33,11 @@ namespace DevTask.MRZService.API.Controllers
             if (person != null)
             {
                 _logger.LogInformation("Produces event for KYC verification.");
-                Guid TransactionId = Guid.NewGuid();
+                Guid transactionId = Guid.NewGuid();
 
-                _serviceBus.Publish(new MRZVerifiedEvent() { TransactionId = Guid.NewGuid(), PersonInformationAsJSON = JsonConvert.SerializeObject(person) });
+                _serviceBus.Publish(new MRZVerifiedEvent() { TransactionId = transactionId, PersonInformationAsJSON = JsonConvert.SerializeObject(person) });
                 _logger.LogInformation("Event  published for KYC verification.");
-                return Ok(TransactionId.ToString());
+                return Ok(transactionId.ToString());
             }
 
             return BadRequest();

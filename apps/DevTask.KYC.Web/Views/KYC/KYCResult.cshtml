@@ -1,0 +1,18 @@
+﻿@model DevTask.KYC.Web.Models.KYCVerificationResult
+@{
+    ViewData["Title"] = "KYCResult";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Verification Result as JSON</h2>
+        @Model.VerificationResult
+    </div>
+    <div class="col-md-12">
+        <h2>Person Information as JSON</h2>
+        @Model.PersonData
+    </div>
+</div>
+    
+

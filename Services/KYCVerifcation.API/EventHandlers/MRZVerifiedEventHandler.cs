@@ -52,9 +52,9 @@ namespace KYCVerifcation.API.EventHandlers
                     PersonInfo = new PersonInfo()
                     {
                         DayOfBirth = 5,
-                        FirstGivenName = "J",
-                        FirstSurName = "Smith",
-                        MiddleName = "Henry",
+                        FirstGivenName = data.GivenName,
+                        FirstSurName = data.LastName,
+                      //  MiddleName = "Henry",
                         MinimumAge = 0,
                         MonthOfBirth = 3,
                         YearOfBirth = 1983
@@ -75,7 +75,7 @@ namespace KYCVerifcation.API.EventHandlers
                 },
                     Passport = new Passport
                     {
-                        Number = "N1236548"
+                        Number = data.PassportNumber
                     }
                 }
 

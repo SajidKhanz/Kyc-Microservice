@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTask.EvenBus", "EventBus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTask.RabbitMQEventBus", "EventBus\DevTask.RabbitMQEventBus\DevTask.RabbitMQEventBus.csproj", "{9F14AD01-7FFE-483C-9C25-05E4AA5E0227}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevTask.KYC.Web", "apps\DevTask.KYC.Web\DevTask.KYC.Web.csproj", "{FF79AF10-3985-4472-95F8-799CD01A6EDE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{9F14AD01-7FFE-483C-9C25-05E4AA5E0227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F14AD01-7FFE-483C-9C25-05E4AA5E0227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F14AD01-7FFE-483C-9C25-05E4AA5E0227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF79AF10-3985-4472-95F8-799CD01A6EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF79AF10-3985-4472-95F8-799CD01A6EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF79AF10-3985-4472-95F8-799CD01A6EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF79AF10-3985-4472-95F8-799CD01A6EDE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +90,7 @@ Global
 		{492C2FA1-40ED-499B-B548-BCA03DC98E77} = {6C49EA54-BAAE-4E74-A2CC-742210634F20}
 		{326932EB-828A-4F61-90B8-BA9C031561E3} = {F9E269F6-03F3-4060-B786-8D4B759531F7}
 		{9F14AD01-7FFE-483C-9C25-05E4AA5E0227} = {F9E269F6-03F3-4060-B786-8D4B759531F7}
+		{FF79AF10-3985-4472-95F8-799CD01A6EDE} = {BC90FC5C-97A8-471A-AA99-36D74F0F0CF4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4572A891-0FC9-4299-B40B-6EFB9893E99C}

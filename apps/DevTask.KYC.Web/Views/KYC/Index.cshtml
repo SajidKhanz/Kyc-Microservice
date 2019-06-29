@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Upload Passport to verify Person!</h2>
+<div class="row">
+    <form method="post" enctype="multipart/form-data" asp-controller="Kyc" asp-action="Index">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <p>Select passport image:</p>
+                    <input type="file" class="btn btn-default" name="file">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-10">
+                    <input type="submit" class="btn btn-primary" value="Upload">
+                </div>
+            </div>
+           
+        </div>
+    </form>
+</div>

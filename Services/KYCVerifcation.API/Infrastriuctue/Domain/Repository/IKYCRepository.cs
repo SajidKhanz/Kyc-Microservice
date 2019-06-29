@@ -9,5 +9,6 @@ namespace KYCVerifcation.API.Infrastriuctue.Domain.Repository
     public interface IKYCRepository
     {
         void AddResult(KYCVerificationResult result);
+        KYCVerificationResult GetKYCVerificationResult(string transactionId);
     }
 }
