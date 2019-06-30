@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
 
 namespace DevTask.MRZService.API
 {
@@ -19,11 +20,11 @@ namespace DevTask.MRZService.API
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-             .ConfigureLogging((hostingContext, logging) =>
-             {
-                 logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));                
-                 logging.AddEventSourceLogger();
-             })
+              .ConfigureLogging(logging =>
+              {
+                  logging.ClearProviders();
+                  logging.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Trace);
+              }).UseNLog()
                 .UseStartup<Startup>();
     }
 }

@@ -8,6 +8,7 @@ using DevTask.KYC.Web.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -20,13 +21,16 @@ namespace DevTask.KYC.Web.Controllers
         IMRZService _mRZservice;
         IKYCService _kYCService;
 
-
+        private readonly ILogger<KYCController> _logger;
+        
         public KYCController(IMRZService mRZservice,
-        IKYCService kYCService)
+        IKYCService kYCService,
+        ILogger<KYCController> logger
+        )
         {
             _mRZservice = mRZservice;
             _kYCService = kYCService;
-
+            _logger = logger;
         }
 
         [Route(Urls.KYCUploadFile)]
@@ -40,8 +44,12 @@ namespace DevTask.KYC.Web.Controllers
         public IActionResult Index(IFormFile file)
         {
 
+            _logger.LogInformation("File upload started");
+
             if (file.Length > 0)
             {
+                _logger.LogInformation("File upload size is " + file.Length);
+
                 using (var ms = new MemoryStream())
                 {
                     file.CopyTo(ms);
@@ -50,6 +58,7 @@ namespace DevTask.KYC.Web.Controllers
                                         
                     var transactionId = _mRZservice.GetPersonInfornmationByMRZ(imageBase64);
 
+                    _logger.LogInformation("File uploaded and transaction id " + transactionId);
                     return Redirect(Urls.KYCResult.Replace("{transactionId}", transactionId));
 
                 }
